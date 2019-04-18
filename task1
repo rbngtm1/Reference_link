@@ -1,0 +1,8 @@
+1. Have a daemon running in the backgroud for running logstash as a service using systemd
+2. Spin down the server and spin up the server, logstash should still be running
+3. Systemctl status logstash
+4. Have elasticsearch/kibana running in a container 
+5. Push all the logs from yum to elasticsearch. 
+
+1 servers running elasticsearch and kibana 
+1 logstash
