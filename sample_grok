@@ -1,7 +1,7 @@
 %{SYSLOGTIMESTAMP:TimeStamp} %{SYSLOGHOST:deviceHostName} \d %{TIMESTAMP_ISO8601:timestamp} %{IP:deviceAddress} %{WORD:serviceName} %{DATA:result},%{DATA:placeholder},%{DATA:action},%{GREEDYDATA}, Machine name: %{SYSLOGHOST: deviceHostName},Machine IP address: %{IP:deviceAddress}, Server: %{IP:destinationAddress}, Client: %{IP:sourceAddress}%{DATA}URL: %{GREEDYDATA:requestURL}
 
 
-
+<153>Apr 19 07:41:54 prodbc07cas1 1 2019-04-19T12:41:54.752Z 10.101.50.112 avservice 19063 - Unknown error (7:0*0),,File has been allowed through unscanned.,,2019-04-19 07:41:54(CDT),Hardware serial number: 4614300002,CASversion(Version 2.3.4.1(227900))-http://www.symantec.com,Antivirus Vendor: Pre AV call, no vendor data, Scan Engine Version: Unknown, Pattern File Version: Unknown(Pattern data: Unknown),, Machine name: prodbc07cas1,Machine IP address: 10.101.50.112, Server: 173.194.191.200, Client: 172.19.115.83,, URL: http://dksfjaskdfaldkfjlajdalkdfk
 
 
 %{SYSLOGTIMESTAMP:TimeStamp} %{SYSLOGHOST:deviceHostName} \d %{TIMESTAMP_ISO8601:timestamp} %{IP:deviceAddress} %{WORD:serviceName} %{DATA:result},%{DATA:placeholder},%{DATA:action},,%{TIMESTAMP_ISO8601}\(%{DATA}\),%{DATA}, Machine name: %{SYSLOGHOST: deviceHostName},Machine IP address: %{IP:deviceAddress}, Server: %{IP:destinationAddress}, Client: %{IP:sourceAddress}%{DATA}URL: %{GREEDYDATA:requestURL}
