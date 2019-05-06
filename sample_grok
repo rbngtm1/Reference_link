@@ -1,1 +1,7 @@
 %{SYSLOGTIMESTAMP:TimeStamp} %{SYSLOGHOST:deviceHostName} \d %{TIMESTAMP_ISO8601:timestamp} %{IP:deviceAddress} %{WORD:serviceName} %{DATA:result},%{DATA:placeholder},%{DATA:action},%{GREEDYDATA}, Machine name: %{SYSLOGHOST: deviceHostName},Machine IP address: %{IP:deviceAddress}, Server: %{IP:destinationAddress}, Client: %{IP:sourceAddress}%{DATA}URL: %{GREEDYDATA:requestURL}
+
+
+
+
+
+%{SYSLOGTIMESTAMP:TimeStamp} %{SYSLOGHOST:deviceHostName} \d %{TIMESTAMP_ISO8601:timestamp} %{IP:deviceAddress} %{WORD:serviceName} %{DATA:result},%{DATA:placeholder},%{DATA:action},,%{TIMESTAMP_ISO8601}\(%{DATA}\),%{DATA}, Machine name: %{SYSLOGHOST: deviceHostName},Machine IP address: %{IP:deviceAddress}, Server: %{IP:destinationAddress}, Client: %{IP:sourceAddress}%{DATA}URL: %{GREEDYDATA:requestURL}
