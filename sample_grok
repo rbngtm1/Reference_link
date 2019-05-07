@@ -1,9 +1,3 @@
-    if "RESPMOD" in [message]{
-        grok {
-            match => {"message" => "\<%{INT:syslognum}\>%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:deviceHostName} %{INT:randomnumber} %{TIMESTAMP_ISO8601:time} %{IP:deviceAddress} %{DATA:serviceName} %{INT:randonnumber} - RESPMOD:%{DATA:requestUrl} %{IP:sourceAddress} - %{GREEDYDATA:transactionUUID}"}
-        }
-    } else {
-        grok {
-            match => {"message" => "\<%{INT:syslognum}\>%{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:deviceHostName} %{INT:randomnumber} %{TIMESTAMP_ISO8601:time} %{IP:deviceAddress} %{DATA:serviceName} %{INT:randonnumber} - %{DATA:requestUrl} verdict %{DATA:verdict}. Hash: %{DATA:hash} Tenant: %{DATA:tenant} Transaction: %{GREEDYDATA:transactionUUID}"}
-        }
-    }
+grok {
+    match => { "message" => "%{WORD:LogLevel} %{QUOTEDSTRING:DateTime} %{IPV4:ClientIP} %{DATA:Component} %{NUMBER:SessionID} %{NUMBER:TransactionID} %{NUMBER:ErrorCode} %{GREEDYDATA:Message}" }
+  }
