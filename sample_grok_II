@@ -1,0 +1,8 @@
+grok {
+            match => {
+              "message" => [
+                    "^<%{INT}>%{INT}:(?:%{SPACE}|%{NOTSPACE})%{DATA:deviceHostName}:(?:%{SPACE}|%{NOTSPACE})%{DATA}:(?:%{SPACE}|%{NOTSPACE})\%%{DATA:facilityCode}-%{INT:severityLevel}-%{DATA:mnemonicCode}:(?:%{SPACE}|%{NOTSPACE})User:%{DATA:user} %{DATA} command:%{GREEDYDATA:command}",
+                    "^<%{INT}>%{INT}:(?:%{SPACE}|%{NOTSPACE})%{DATA:deviceHostName}:(?:%{SPACE}|%{NOTSPACE})%{DATA}:(?:%{SPACE}|%{NOTSPACE})\%%{DATA:facilityCode}-%{INT:severityLevel}-%{DATA:mnemonicCode}:(?:%{SPACE}|%{NOTSPACE})%{GREEDYDATA:rest}"
+                ]
+              }
+        }
