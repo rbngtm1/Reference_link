@@ -6,3 +6,16 @@ grok {
                 ]
               }
         }
+
+
+  grok {
+            break_on_match => true
+            match => {
+              "message" => [
+                    "^<%{INT}>(?:%{SPACE}|%{NOTSPACE})%{INT}:(?:%{SPACE}|%{NOTSPACE})%{DATA:deviceHostName}:(?:%{SPACE}|%{NOTSPACE})%{DATA}:(?:%{SPACE}|%{NOTSPACE})\%%{DATA:facilityCode}-%{INT:severityLevel}-%{DATA:mnemonicCode}:(?:%{SPACE}|%{NOTSPACE})User:%{DATA:user} %{DATA} command:%{GREEDYDATA:command}",
+                    "^<%{INT}>(?:%{SPACE}|%{NOTSPACE})%{INT}:(?:%{SPACE}|%{NOTSPACE})%{DATA:deviceHostName}:(?:%{SPACE}|%{NOTSPACE})%{DATA}:(?:%{SPACE}|%{NOTSPACE})\%%{DATA:facilityCode}-%{INT:severityLevel}-%{DATA:mnemonicCode}:(?:%{SPACE}|%{NOTSPACE})%{GREEDYDATA:rest}",
+                    "^<%{INT}>:(?:%{SPACE}|%{NOTSPACE})%{DATA}\%%{DATA:facilityCode}-%{INT:severityLevel}-%{DATA:mnemonicCode}:(?:%{SPACE}|%{NOTSPACE})%{GREEDYDATA:rest}",
+                    "^%{GREEDYDATA}"
+                ]
+              }
+        }
