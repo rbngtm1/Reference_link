@@ -1,0 +1,21 @@
+grok {
+            break_on_match => false
+            tag_on_failure => [ ]
+            match => {
+              "message" => [
+                    "^%{DATA:descMessage}(?<=\.) %{GREEDYDATA}",
+                    "^%{GREEDYDATA} Login from: %{IP:sourceAddress}(?:\.|, %{GREEDYDATA})",
+                    "^%{GREEDYDATA} Source region: %{DATA:sourceRegion}(?:\.|, %{GREEDYDATA})",
+                    "^%{GREEDYDATA} User name: %{DATA:sourceUserId}(?:\.|, %{GREEDYDATA})",
+                    "^%{GREEDYDATA} Client OS version: %{DATA:clientOSVersion}(?<=\S)(?:\.|, %{GREEDYDATA})",
+                    "^%{GREEDYDATA} Config name: %{DATA:configName}(?:\.|, %{GREEDYDATA})",
+                    "^%{GREEDYDATA} Private IP: %{IP:privateAddress}(?:\.|, %{GREEDYDATA})",
+                    "^%{GREEDYDATA} Device name: %{DATA:deviceName}(?:\.|, %{GREEDYDATA})",
+                    "^%{GREEDYDATA} Reason: %{DATA:eventReason}(?:\.|, %{GREEDYDATA})",
+                    "^%{GREEDYDATA} Auth type: %{DATA:authenticationType}(?:\.|, %{GREEDYDATA})"
+                ]
+              }
+        }
+        
+    https://www.regular-expressions.info/quickstart.html
+    
