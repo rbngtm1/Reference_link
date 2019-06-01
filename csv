@@ -1,0 +1,8 @@
+config:
+    csv {
+            columns => ["FUTURE_USE", "ReceiveTime", "SerialNumber", "Type", "Subtype", "FUTURE_USE", "GeneratedTime", "Host", "VirtualSystem", "Command", "Admin", "Client", "Result", "ConfigurationPath", "BeforeChangeDetail", "AfterChangeDetail", "SequenceNumber", "ActionFlags", "DeviceGroupHierarchyLeve11", "DeviceGroupHierarchyLevel2", "DeviceGroupHierarchyLevel3", "DeviceGroupHierarchyLeve14", "VirtualSystemName", "DeviceName" ]
+        }
+system:
+ csv {
+            columns => ["FUTURE_USE", "ReceiveTime", "SerialNumber", "Type", "Content/Thread Type (subtype)", "FUTURE_USE", "GeneratedTime", "VirtualSystem", "Event ID", "Object", "FUTURE_USE", "FUTURE_USE", "Module", "Severity", "Description", "SequenceNumber", "ActionFlags", "DeviceGroupHierarchyLeve11", "DeviceGroupHierarchyLevel2", "DeviceGroupHierarchyLevel3", "DeviceGroupHierarchyLeve14", "VirtualSystemName", "DeviceName" ]
+        }
