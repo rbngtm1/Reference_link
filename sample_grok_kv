@@ -1,0 +1,39 @@
+grok {
+        break_on_match => false
+        match => {
+            "message" => [
+                "^%{DATA:descMessage}(?<=\.) %{GREEDYDATA:[@metadata][rest]}."
+            ]
+        }
+    }
+
+    kv {
+         source => "[@metadata][rest]"
+         remove_char_key => " "
+         field_split_pattern => "(?<=\S),"
+         value_split => ":"
+         include_keys => [
+            "Loginfrom", 
+            "Sourceregion", 
+            "Username", 
+            "ClientOSversion", 
+            "Configname", 
+            "PrivateIP", 
+            "Devicename", 
+            "Reason", 
+            "Authtype"
+            ]
+    }
+    mutate {
+        rename => {
+            "Loginfrom" => "sourceAddress"
+            "Sourceregion" => "sourceRegion"
+            "Username" => "sourceUserId"
+            "ClientOSversion" => "clientOSVersion"
+            "Configname" => "configName"
+            "PrivateIP" => "privateAddress"
+            "Devicename" => "deviceName"
+            "Reason" => "eventReason"
+            "Authtype" => "authenticationType"
+        }
+    }
