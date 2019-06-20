@@ -1,0 +1,47 @@
+import json
+
+
+def execute_shell_command(shell_command):
+    import subprocess
+    command_response = subprocess.Popen(shell_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                        shell=True)
+    command_output, command_error = command_response.communicate()
+    return command_response.returncode, command_output, command_error
+
+
+def get_logstash_command(shardId,start_time,end_time,period):
+    command_logstash = ['/usr/local/bin/aws', 'cloudwatch', 'get-metric-statistics',
+                                   '--namespace','cse_kinesis_auditd_logstash', '--metric-name',
+                                   'RecordsProcessed',
+                                   '--statistics', 'Sum', '--dimentions', 'Name=Operation', 'Value=ProcessTask',
+                                   'Name=ShardId,Value=', shardId, '--start-time', start_time,
+                                   '--end-time',end_time,'--period',str(period), '--profile=s3access','--region=us-east-1']
+
+    command = ' '.join(command_logstash)
+    return command
+
+
+def get_audit_shardid_command():
+    shardid_command = ['/usr/local/bin/aws',
+                       'cloudwatch',
+                       'list-metrics',
+                       '--namespace',
+                       '"cse_kinesis_auditd_logstash"',
+                       '--profile=s3access',
+                       '--region=us-east-1',
+                       '--metric-name',
+                       'KinesisDataFactor.getRecords.Success']
+    command = ' '.join(shardid_command)
+    return command
+
+
+def get_shadids_list():
+    command_output = execute_shell_command(get_audit_shardid_command())
+    shardid_list = []
+    resp_dict = json.loads(command_output)
+    for list1 in resp_dict['metrics']:
+        for list2 in list1['Dimensions']:
+            if str(list2['Value']).startswith('ShardId'):
+                shardid_list.append(str(list2['Value']))
+    print(shardid_list)
+    return shardid_list
