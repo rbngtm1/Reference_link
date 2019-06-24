@@ -1,0 +1,8 @@
+import json
+jsonFile = open('json_kafka.json', 'r')
+values = json.load(jsonFile)
+dictionary_ctoc=values["main-grouping-json
+parsed_field1=dictionary_ctoc["Source field"]
+# Source field
+print(parsed_field1)
+jsonFile.close()
