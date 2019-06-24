@@ -6,3 +6,6 @@ parsed_field1=dictionary_ctoc["Source field"]
 # Source field
 print(parsed_field1)
 jsonFile.close()
+
+
+https://stackoverflow.com/questions/12934699/selecting-fields-from-json-output
