@@ -9,3 +9,23 @@ jsonFile.close()
 
 
 https://stackoverflow.com/questions/12934699/selecting-fields-from-json-output
+how to call the endpoint to send the data?
+
+ssh to a system, get the output from a command
+https://askubuntu.com/questions/917200/how-to-redirect-command-output-from-remote-machine-to-local-file-via-ssh?rq=1
+
+import json
+
+def get_values_from_json():
+    jsonFile = open('json_kafka.json', 'r')
+    dict_from_json = json.load(jsonFile)
+    for primaryKey in dict_from_json:
+        if str(primaryKey).startswith("ls-"):
+            newPrimaryKey = "{}-v1".format(primaryKey)
+            shipper_port = dict_from_json[primaryKey]["ShipperPort"]
+            command = "/ctoc/vendor-kafka/bin/kafka-console-consumer.sh --bootstrap-server ctockafkab.usaa.com:80 --consumer.config /ctoc/app-common/ssl/kafka_client.properties --topic " + newPrimaryKey + " --from beginning | grep CONFIG"
+            print(command)
+            print(shipper_port)
+
+
+get_values_from_json()
