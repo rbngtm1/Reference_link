@@ -30,6 +30,15 @@ def get_values_from_json():
 
 get_values_from_json()
 ==============================================================
+import json
+import subprocess
+
+def execute_shell_command(shell_command):
+    import subprocess
+    command_response = subprocess.Popen(shell_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                        shell=True)
+    command_output, command_error = command_response.communicate()
+    return command_response.returncode, command_output, command_error
 def get_values_from_json():
     jsonString = open('json_kafka.json', 'r')
     count = 0
