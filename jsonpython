@@ -29,3 +29,25 @@ def get_values_from_json():
 
 
 get_values_from_json()
+==============================================================
+def get_values_from_json():
+    jsonString = open('json_kafka.json', 'r')
+    count = 0
+    dict_from_json = json.load(jsonString)
+    for primaryKey in dict_from_json:
+        if str(primaryKey).startswith("ls-"):
+            newPrimaryKey = "{}-v1".format(primaryKey)
+            shipper_port = dict_from_json[primaryKey]["ShipperPort"]
+            if count == 2:
+                break
+            else:
+
+                rakhi = (["/ctoc/vendor-kafka/bin/kafka-console-consumer.sh", "--bootstrap-server ctockafkab.usaa.com:80", "--consumer.config", "/ctoc/app-common/ssl/kafka_client.properties", "--topic ", newPrimaryKey , " --from beginning"])
+
+                code, output, error = execute_shell_command(shell_command=rakhi)
+                Dict_output = json.load(output)
+                parsed_message = Dict_output["message"]
+                count += 1
+                return parsed_message
+
+get_values_from_json()
