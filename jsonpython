@@ -23,7 +23,7 @@ def get_values_from_json():
         if str(primaryKey).startswith("ls-"):
             newPrimaryKey = "{}-v1".format(primaryKey)
             shipper_port = dict_from_json[primaryKey]["ShipperPort"]
-            command = "/ctoc/vendor-kafka/bin/kafka-console-consumer.sh --bootstrap-server ctockafkab.usaa.com:80 --consumer.config /ctoc/app-common/ssl/kafka_client.properties --topic " + newPrimaryKey + " --from beginning | grep CONFIG"
+            command = "/ctoc/vendor-kafka/bin/kafka-console-consumer.sh --bootstrap-server blabla.com:80 --consumer.config /ctoc/app-common/ssl/kafka_client.properties --topic " + newPrimaryKey + " --from beginning | grep CONFIG"
             print(command)
             print(shipper_port)
 
@@ -42,7 +42,7 @@ def get_values_from_json():
                 break
             else:
 
-                rakhi = (["/ctoc/vendor-kafka/bin/kafka-console-consumer.sh", "--bootstrap-server ctockafkab.usaa.com:80", "--consumer.config", "/ctoc/app-common/ssl/kafka_client.properties", "--topic ", newPrimaryKey , " --from beginning"])
+                rakhi = (["/ctoc/vendor-kafka/bin/kafka-console-consumer.sh", "--bootstrap-server blabla.com:80", "--consumer.config", "/ctoc/app-common/ssl/kafka_client.properties", "--topic ", newPrimaryKey , " --from beginning"])
 
                 code, output, error = execute_shell_command(shell_command=rakhi)
                 Dict_output = json.load(output)
