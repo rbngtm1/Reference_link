@@ -1,0 +1,27 @@
+import json
+import subprocess
+
+def execute_shell_command(shell_command):
+    command_response = subprocess.Popen(shell_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    command_output, command_error = command_response.communicate()
+    return command_response.returncode, command_output, command_error
+
+def get_values_from_json():
+    loaded_json = json.loads(open('json_kafka.json').read())
+    for primaryKey in loaded_json:
+        if(str(primaryKey).startswith("ls-")):
+            count = 0;
+            newPrimaryKey = "{}-v1".format(primaryKey)
+            shipper_port = loaded_json[primaryKey]["ShipperPort"]
+            if count == 2:
+                break
+            else:
+                rakhi = (["echo", "Hello world"])
+                code, output, error = execute_shell_command(shell_command=rakhi)
+                print(code, output)
+                Dict_output = json.load(output)
+                parsed_message = Dict_output["message"]
+                count += 1
+                return parsed_message
+
+get_values_from_json()
