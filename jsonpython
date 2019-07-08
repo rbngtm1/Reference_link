@@ -60,3 +60,66 @@ def get_values_from_json():
                 return parsed_message
 
 get_values_from_json()
+
+==============================================
+import json
+
+import subprocess
+
+import socket
+
+import time
+
+
+
+
+
+def execute_shell_command_timeout(command, timeout):
+
+    p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    for t in xrange(timeout):
+
+        if p.poll() is not None:
+
+            return p.communicate()
+
+        time.sleep(1)
+
+    p.kill()
+
+    return "killed", "killed by timeout"
+
+
+
+
+
+def get_values_from_json():
+
+    #kafka_msg = ["ping", "robingautam.com"]
+
+    kafka_msg = ["ls", "-lart"]
+
+    #print(kafka_msg)
+
+    try:
+
+        out, err = execute_shell_command_timeout(kafka_msg,5)
+
+        print out, err
+
+
+    except Exception as e:
+
+        print (e)
+
+
+
+def main():
+
+    get_values_from_json()
+
+
+
+main()
+
