@@ -5,12 +5,12 @@ import subprocess
 import socket
 
 import time
-host = '3.81.164.16'
+host = '54.173.171.131'
 #####################################
 
 def execute_shell_command_timeout(shell_command, timeout):
 
-    command_response = subprocess.Popen(shell_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+    command_response = subprocess.Popen(shell_command, stdout=subprocess.PIPE, s                                                                                                                tderr=subprocess.PIPE, shell=True)
 
     for t in xrange(timeout):
 
@@ -34,10 +34,12 @@ def get_values_from_json():
         if str(primaryKey).startswith("ls-"):
             newPrimaryKey = "{0}-v1".format(primaryKey)
             shipper_port = dict_from_json[primaryKey]["ShipperPort"]
-            #kafka_msg = "echo "+ newPrimaryKey +" "+ shipper_port +""
+            UDPorTCP = dict_from_json[primaryKey]["UDP_OR_TCP"]
+            UDPorTCP = int(UDPorTCP)
+            kafka_msg = "echo "+ shipper_port +""
+            shipper_port = int(shipper_port)
 
-
-            kafka_msg = "ping robingautam.com"
+            #kafka_msg = "ping robingautam.com"
 
    # kafka_msg = ["ls", "-lart"]
 
@@ -55,13 +57,22 @@ def get_values_from_json():
                 print (e)
 
             try:
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                if UDPorTCP == 61000 or UDPorTCP == 62000:
+                    TCP_UDP=socket.SOCK_DGRAM
+                    tcp_con = 0
+                    print "UDP"
+                else:
+                    TCP_UDP=socket.SOCK_STREAM
+                    tcp_con = 1
+                    print "TCP"
+                s = socket.socket(socket.AF_INET, TCP_UDP)
                 print "using socket module"
                 s.connect((host, shipper_port))
                 print "connecting host withy port"
                 s.send(str(out).encode('utf-8'))
                 print "sending the data"
-                s.close()
+                if tcp_con:
+                    s.close()
             except Exception as e:
                 print (e)
                 s.close()
@@ -74,6 +85,4 @@ def main():
 
 
 main()
-
-
 
