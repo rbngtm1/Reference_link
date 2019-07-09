@@ -1,0 +1,84 @@
+import json
+
+import subprocess
+
+import socket
+
+import time
+host = '3.81.164.22'
+#####################################
+
+def execute_shell_command_timeout(shell_command, timeout):
+
+    command_response = subprocess.Popen(shell_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+
+    for t in xrange(timeout):
+
+        if command_response.poll() is not None:
+
+            return command_response.communicate()
+
+        time.sleep(1)
+
+    command_response.kill()
+
+    return "killed", "killed by timeout"
+
+
+
+
+def get_values_from_json():
+    jsonString = open('json_kafka.json', 'r')
+    dict_from_json = json.load(jsonString)
+    for primaryKey in dict_from_json:
+        if str(primaryKey).startswith("ls-"):
+            newPrimaryKey = "{0}-v1".format(primaryKey)
+            shipper_port = dict_from_json[primaryKey]["ShipperPort"]
+            UDPorTCP = dict_from_json[primaryKey]["UDP_OR_TCP"]
+            UDPorTCP = int(UDPorTCP)
+            kafka_msg = "echo "+ shipper_port +""
+            shipper_port = int(shipper_port)
+
+            #kafka_msg = "ping robingautam.com"
+
+   # kafka_msg = ["ls", "-lart"]
+
+    #print(kafka_msg)
+
+            try:
+
+                out, err = execute_shell_command_timeout(kafka_msg,5)
+
+                print out, err
+
+
+            except Exception as e:
+
+                print (e)
+
+            try:
+                if UDPorTCP >= 200:
+                    print "UDP"
+                else:
+                    print "TCP"
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                print "using socket module"
+                s.connect((host, shipper_port))
+                print "connecting host withy port"
+               # s.send(str(out).encode('utf-8'))
+              #  print "sending the data"
+             #   s.close()
+            except Exception as e:
+                print (e)
+                s.close()
+
+
+def main():
+
+    get_values_from_json()
+
+
+
+main()
+
+
