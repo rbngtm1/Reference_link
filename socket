@@ -1,86 +1,194 @@
 import json
 
+
+
 import subprocess
+
+
 
 import socket
 
+
+
 import time
-host = '54.173.171.131'
+
+host = '3.92.160.2'
+
 #####################################
 
 def execute_shell_command_timeout(shell_command, timeout):
 
-    command_response = subprocess.Popen(shell_command, stdout=subprocess.PIPE, s                                                                                                                tderr=subprocess.PIPE, shell=True)
+
+
+    command_response = subprocess.Popen(shell_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
+
+
 
     for t in xrange(timeout):
 
+
+
         if command_response.poll() is not None:
+
+
 
             return command_response.communicate()
 
+
+
         time.sleep(1)
 
+
+
     command_response.kill()
+
+
 
     return "killed", "killed by timeout"
 
 
 
 
+
+
+
+
+
 def get_values_from_json():
+
     jsonString = open('json_kafka.json', 'r')
+
     dict_from_json = json.load(jsonString)
+
     for primaryKey in dict_from_json:
-        if str(primaryKey).startswith("ls-"):
+
+        if primaryKey.startswith("ls-"):
+
             newPrimaryKey = "{0}-v1".format(primaryKey)
+
             shipper_port = dict_from_json[primaryKey]["ShipperPort"]
+
+            if shipper_port == "":
+
+                continue
+
+            shipper_port = int(shipper_port) 
+
             UDPorTCP = dict_from_json[primaryKey]["UDP_OR_TCP"]
-            UDPorTCP = int(UDPorTCP)
-            kafka_msg = "echo "+ shipper_port +""
-            shipper_port = int(shipper_port)
+
+            kafka_msg = "echo '{\n\"@version\":\"1\",\n\"type\":\"symantecdlp\",\n\"message\":\"<13>Jun 10 09:05:45 prodmachine13 event_data.Occurence=June 10, 2019 9:05:26 AM\\\\r\\\\nincident_id=12323\\\\r\\\\nalertSeverity=3:Low\\\\r\\\\nblocked=None\\\\r\\\\nprotocol=Endpoint Local Drive\\\\r\\\\ndeviceHostName=Endpoint ITC - proddlp101l\\\\r\\\\nPolicyName=IRM_Endpoint PCI 2 Count-Monitor\\\\r\\\\nrules=Credit Card Numbers, All\\\\r\\\\nmatch_count=2\\\\nsourceUserId=QL22344\\\\r\\\\nmanager_email=tare.das@gmail.com\\\\r\\\\nmanager_phone=(210) 913-7485\\u0000\",\n\"ship_hostname\":\"prodmachime403lsat\",\n\"host\":\"10.88.99.9\",\n\"ship_time\":\"2019-06-15T14:08:45.345Z\",\n\"@timestamp\":\"2019-06-15T14:08:45.242Z\"\n}'"
+
+
 
             #kafka_msg = "ping robingautam.com"
 
-   # kafka_msg = ["ls", "-lart"]
 
-    #print(kafka_msg)
+
+
 
             try:
+
+
 
                 out, err = execute_shell_command_timeout(kafka_msg,5)
 
+
+
                 print out, err
 
+                data = json.loads(out)
+
+                for key in data.keys():
+
+                    if key == "ship_hostname" :
+
+                        data.pop('ship_hostname')
+
+                    if key == "@version" :
+
+                        data.pop('@version')
+
+                    if key == "ship_time" :
+
+                        data.pop('ship_time')
+
+
+
+                data_string = json.dumps(data)
+
+                print data_string
+
+
 
             except Exception as e:
 
+
+
                 print (e)
+
+
 
             try:
-                if UDPorTCP == 61000 or UDPorTCP == 62000:
+
+                if UDPorTCP == "UDP":
+
                     TCP_UDP=socket.SOCK_DGRAM
+
                     tcp_con = 0
+
                     print "UDP"
-                else:
+
+                elif UDPorTCP == "TCP":
+
                     TCP_UDP=socket.SOCK_STREAM
+
                     tcp_con = 1
+
                     print "TCP"
+
+                else:
+
+                    TCP_UDP=socket.SOCK_STREAM
+
+                    tcp_con = 2
+
+                    print "TCP"
+
                 s = socket.socket(socket.AF_INET, TCP_UDP)
+
                 print "using socket module"
+
                 s.connect((host, shipper_port))
+
                 print "connecting host withy port"
-                s.send(str(out).encode('utf-8'))
+
+                s.send(json.load(data.encode('utf-8')))
+
                 print "sending the data"
+
                 if tcp_con:
+
                     s.close()
+
             except Exception as e:
+
                 print (e)
+
                 s.close()
+
+
+
 
 
 def main():
 
+
+
     get_values_from_json()
+
+
+
+
 
 
 
