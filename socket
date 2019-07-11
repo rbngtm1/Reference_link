@@ -76,11 +76,11 @@ def get_values_from_json():
 
             UDPorTCP = dict_from_json[primaryKey]["UDP_OR_TCP"]
 
-            kafka_msg = "echo '{\n\"@version\":\"1\",\n\"type\":\"symantecdlp\",\n\"message\":\"<13>Jun 10 09:05:45 prodmachine13 event_data.Occurence=June 10, 2019 9:05:26 AM\\\\r\\\\nincident_id=12323\\\\r\\\\nalertSeverity=3:Low\\\\r\\\\nblocked=None\\\\r\\\\nprotocol=Endpoint Local Drive\\\\r\\\\ndeviceHostName=Endpoint ITC - proddlp101l\\\\r\\\\nPolicyName=IRM_Endpoint PCI 2 Count-Monitor\\\\r\\\\nrules=Credit Card Numbers, All\\\\r\\\\nmatch_count=2\\\\nsourceUserId=QL22344\\\\r\\\\nmanager_email=tare.das@gmail.com\\\\r\\\\nmanager_phone=(210) 913-7485\\u0000\",\n\"ship_hostname\":\"prodmachime403lsat\",\n\"host\":\"10.88.99.9\",\n\"ship_time\":\"2019-06-15T14:08:45.345Z\",\n\"@timestamp\":\"2019-06-15T14:08:45.242Z\"\n}'"
+            kafka_msg = "echo sth"
 
 
 
-            #kafka_msg = "ping robingautam.com"
+            #kafka_msg = "ping blabla.com"
 
 
 
