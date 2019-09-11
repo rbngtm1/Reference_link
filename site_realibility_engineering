@@ -1,0 +1,69 @@
+apiserver: (frontend--like 
+
+scheduler (schedule pod which node to start and deploy
+
+control manager (is up and running or not (status check)
+
+etcd (key-value-store) (brain)
+
+
+worker in node => kubelet communicates with master
+
+kubeproxy in worker => trafic 
+
+namespace => cluster inside virtual cluster (isolated from each other)
+
+build with parameter (jenkins) parameterized build (last failed step--continue)
+upstream --> downstream
+fingerprint-- hierachy dependency upon projects(it will tell which project is causing problem)
+every month maintainance team called code freeze, where nothing is pushed in source code. At that time, I was responsible for building service pack ,,, artifacts are stored in nexus and box, regration testing and bug testing done by QA team. If they see issue with build, they request to rebuild. At this time we do build with parameter.
+
+customplugin, aws plugin, esr(elastic search reported), logstash plugin, 
+
+
+rpm installation method for elastic, (upgrades and downgrates are easier with rpm)
+write a script in etc/systemd/
+
+
+We have shared liabrary (define everything in other build file),(we run java project)
+Configured minikube and minikube dashboard, set up cluster using EKS. kops in EKS 
+
+artifacts send to jfrog(clean up nexus for handling old artifacts)\
+
+
+Helm is a tool for Kubernetes that helps you install and manage applications. 
+Helm has 2 sides, client and server
+
+Client												Server(Tiller)
+Runs on your computer                               Runs in Kubernetes cluster
+Generates Kubernetes YAML templates                 Manages Releases and Helm history
+Sends requests to a Teller
+
+The format Helm uses to package application is called a Chart. A chart is a directory where we have our yaml configuration that includes templates, value.yml and helpers(where functions are declared)
+
+SRE: Site Reliablility Engineereing
+SLO: Service Level Objective
+SLI: Scalable Link Interface
+
+MTTR= Mean time to repair
+MTTD= Mean time to discover is part of Mean time to repair
+
+
+Four golden signals for monitoring
+LTES 
+Latency
+Traffic
+Error
+Saturation(load on network and server resources)
+
+
+
+SLI (Service Level Indicator) (quantitative measurement like latency)
+SLO(service Level Objective) (amount of time that an SLI can be out of specification)
+SLA(Service Level Agreement) business agrement with explicit consequences for failing to deliver services
+Error BUdget: quantifying risk and accidents, change should be graduatual. SLO defines ERROR budget. Risk in more downtime,
+reduced risk to remain in SLO (helps in balancing innovation and stability to an appropriate level)(If SLI are failing all the time, then you need to stop your future releases)
+
+OVerhead(email, meeting) 
+toil (each time you need to touch a production system, it is toil time)_
+automate toil , reduce the amount of toil
