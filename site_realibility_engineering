@@ -39,7 +39,8 @@ Runs on your computer                               Runs in Kubernetes cluster
 Generates Kubernetes YAML templates                 Manages Releases and Helm history
 Sends requests to a Teller
 
-The format Helm uses to package application is called a Chart. A chart is a directory where we have our yaml configuration that includes templates, value.yml and helpers(where functions are declared)
+The format Helm uses to package application is called a Chart. A chart is a directory where we have our yaml configuration that 
+includes templates, value.yml and helpers(where functions are declared)
 
 SRE: Site Reliablility Engineereing
 SLO: Service Level Objective
@@ -62,7 +63,8 @@ SLI (Service Level Indicator) (quantitative measurement like latency)
 SLO(service Level Objective) (amount of time that an SLI can be out of specification)
 SLA(Service Level Agreement) business agrement with explicit consequences for failing to deliver services
 Error BUdget: quantifying risk and accidents, change should be graduatual. SLO defines ERROR budget. Risk in more downtime,
-reduced risk to remain in SLO (helps in balancing innovation and stability to an appropriate level)(If SLI are failing all the time, then you need to stop your future releases)
+reduced risk to remain in SLO (helps in balancing innovation and stability to an appropriate level)(If SLI are failing all the time, 
+then you need to stop your future releases)
 
 OVerhead(email, meeting) 
 toil (each time you need to touch a production system, it is toil time)_
