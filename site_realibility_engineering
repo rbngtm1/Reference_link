@@ -16,7 +16,8 @@ namespace => cluster inside virtual cluster (isolated from each other)
 build with parameter (jenkins) parameterized build (last failed step--continue)
 upstream --> downstream
 fingerprint-- hierachy dependency upon projects(it will tell which project is causing problem)
-every month maintainance team called code freeze, where nothing is pushed in source code. At that time, I was responsible for building service pack ,,, artifacts are stored in nexus and box, regration testing and bug testing done by QA team. If they see issue with build, they request to rebuild. At this time we do build with parameter.
+every month maintainance team called code freeze, where nothing is pushed in source code. At that time, 
+I was responsible for building service pack ,,, artifacts are stored in nexus and box, regration testing and bug testing done by QA team. If they see issue with build, they request to rebuild. At this time we do build with parameter.
 
 customplugin, aws plugin, esr(elastic search reported), logstash plugin, 
 
