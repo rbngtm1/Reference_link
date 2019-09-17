@@ -1,0 +1,6 @@
+To see what service are running at system level
+ls -l /etc/systemd/system/multi-user.target.wants
+
+
+to find files
+find /. -name 10-kubeadm.conf
