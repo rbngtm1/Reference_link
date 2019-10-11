@@ -6,6 +6,6 @@ stage('2nd stage'){
    sh "touch abc.txt"
    }
 stage('3rd stage'){
-   sh "mkdir sample in feature branch "
+   sh "echo sample in feature branch "
  }
 }
