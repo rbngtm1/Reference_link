@@ -15,7 +15,6 @@ stage('deployment'){
         sshagent(['ec2-user']) {
         sh "ssh -o StrictHostKeyChecking=no ec2-user@54.173.243.85 /home/ec2-user/tomcat9/bin/startup.sh"
         sh "scp -o StrictHostKeyChecking=no /home/ec2-user/workspace/pipeline-project/addressbook_main/target/addressbook.war ec2-user@54.173.243.85 /home/ec2-user/tomcat9/webapps"
-      //  sh "ssh -o StrictHostKeyChecking=no ec2-user@10.0.0.53 /opt/tomcat/stop.sh"
-    }
+       }
     }
 }
