@@ -9,7 +9,7 @@ junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 sh "echo hello world"
    }
 stage('maven package'){
-        sh "$mvnhome/bin/mvn clean package -DskipTests=true"
+        sh "$mvnTool/bin/mvn clean package -DskipTests=true"
     }
 stage('3rd stage'){
    sh "echo sample in feature branch "
