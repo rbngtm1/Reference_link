@@ -4,13 +4,13 @@ stage('maven define'){
 def mvnTool = tool 'Apache Maven 3.6.2'
 
 // execute maven
-sh "${mvnTool}/bin/mvn clean test surefire-report:report-only" 
+sh "${mvnTool}/bin/mvn clean package" 
 junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 sh "echo hello world"
    }
-stage('package'){
-  sh "${mvnTool}/bin/mvn clean package"
-   }
+stage('artifacts'){
+archiveArtifacts '**/target/*.war'   
+}
 stage('3rd stage'){
    sh "echo sample in feature branch "
  }
