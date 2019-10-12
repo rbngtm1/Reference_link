@@ -6,12 +6,11 @@ def mvnTool = tool 'Apache Maven 3.6.2'
 // execute maven
 sh "${mvnTool}/bin/mvn clean install" 
 junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
-publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/site', reportFiles: 'index.html', reportName: 'HTMLReport', reportTitles: ''])sh "${mvnTool}/bin/mvn clean test surefire-report:report-only"   
-   sh "echo hello world"
+sh "echo hello world"
    }
-stage('2nd stage'){
-   sh "touch abc.txt"
-   }
+stage('maven package'){
+        sh "$mvnhome/bin/mvn clean package -DskipTests=true"
+    }
 stage('3rd stage'){
    sh "echo sample in feature branch "
  }
