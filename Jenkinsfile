@@ -11,7 +11,11 @@ sh "echo hello world"
 stage('artifacts'){
 archiveArtifacts '**/target/*.war'   
 }
-stage('3rd stage'){
-   sh "echo sample in feature branch "
- }
+stage('deployment'){
+        sshagent(['ec2-user']) {
+        sh "ssh -o StrictHostKeyChecking=no ec2-user@54.173.243.85 /home/ec2-user/tomcat9/bin/startup.sh"
+      // sh "scp -o StrictHostKeyChecking=no /home/ec2-user/workspace/pipeline/target/my-app-1-RELEASE.jar ec2-user@10.0.0.53:/opt/tomcat/webapp"
+      //  sh "ssh -o StrictHostKeyChecking=no ec2-user@10.0.0.53 /opt/tomcat/stop.sh"
+    }
+    }
 }
