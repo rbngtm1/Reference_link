@@ -19,4 +19,4 @@
   
 #### In order to create a incident on Pagerduty, the user must always be on call 
 
-#### To connect the escalation policy to monitoring tool, create a service inside "configuration tab". For exploring more API, see https://wwwdeveloper.pagerduty.com
+#### To connect the escalation policy to monitoring tool, create a service inside "configuration tab". For exploring more API, see https://www.developer.pagerduty.com
